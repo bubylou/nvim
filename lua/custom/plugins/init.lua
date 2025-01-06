@@ -1,4 +1,21 @@
 return {
+  { "codethread/qmk.nvim",
+      config = function()
+        ---@type qmk.UserConfig
+        local conf = {
+            name = 'LAYOUT_moonlander',
+            layout = {
+                'x x x x x x x x x x x x x x',
+                'x x x x x x x x x x x x x x',
+                'x x x x x x x x x x x x x x',
+                'x x x x x x _ _ x x x x x x',
+                'x x x x x x _ _ x x x x x x',
+                '_ _ _ x x x _ _ x x x _ _ _',
+            }
+        }
+        require('qmk').setup(conf)
+    end
+  },
   { -- Useful plugin to show you pending keybinds.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
@@ -56,6 +73,13 @@ return {
     },
   },
   {
+    -- 'sainnhe/everforest'
+    -- 'nanotech/jellybeans.vim'
+    -- 'sainnhe/sonokai'
+    -- 'ellisonleao/gruvbox.nvim'
+    -- 'RRethy/nvim-base16'
+    -- 'rebelot/kanagawa.nvim'
+    -- 'tiagovla/tokyodark.nvim'
     'catppuccin/nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     init = function()
@@ -108,7 +132,7 @@ return {
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'go', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'python', 'query', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
