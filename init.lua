@@ -71,6 +71,12 @@ vim.opt.scrolloff = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+-- Tmux compatabilty
+vim.keymap.set('n', '<C-h>', '<cmd> TmuxNavigateLeft<CR>', { silent = true })
+vim.keymap.set('n', '<C-j>', '<cmd> TmuxNavigateDown<CR>', { silent = true })
+vim.keymap.set('n', '<C-k>', '<cmd> TmuxNavigateUp<CR>', { silent = true })
+vim.keymap.set('n', '<C-l>', '<cmd> TmuxNavigateRight<CR>', { silent = true })
+
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -147,6 +153,19 @@ require('lazy').setup({
     },
   },
 })
+
+local Terminal = require('toggleterm.terminal').Terminal
+local lazygit  = Terminal:new({ cmd = "lazygit", hidden = true })
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>tt', [[<Cmd>ToggleTerm<CR>]])
+vim.keymap.set('t', '<esc>', [[<C-\><C-n>]])
+vim.keymap.set("n", "<leader>md", "<cmd>TermExec cmd='glow %:p'<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ee", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>", { noremap = true, silent = true })
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
